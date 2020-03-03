@@ -17,7 +17,7 @@ module.exports = {
           return newUser.rows[0].sessionid;
         })
         .then(() => {
-          res.redirect(200, "/teams");
+          res.redirect(200, "/home");
         });
     } else {
       res.status(500).send("User already exists");

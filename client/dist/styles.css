@@ -1,0 +1,24 @@
+.navigation {
+  height: 60px;
+  margin-bottom: 15px;
+  width: 100%;
+  border-bottom: outset;
+}
+
+.nav_logo_image {
+  height: 50px;
+  margin-left: 20px;
+}
+
+.nav_logo {
+  width: 95%;
+}
+
+.logout :hover {
+  cursor: pointer;
+}
+
+.nav_bar {
+  display: flex;
+  width: 100%;
+}
