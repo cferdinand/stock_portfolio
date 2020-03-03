@@ -69,10 +69,16 @@ CREATE TABLE sessions_table (
   session_value VARCHAR(250) NULL,
 );
 
--- ALTER TABLE IF EXISTS users ADD CONSTRAINT sessfk FOREIGN KEY (sessionid) REFERENCES sessions_table (id);
--- ALTER TABLE IF EXISTS sessions_table ADD CONSTRAINT sursfk FOREIGN KEY (user_id) REFERENCES users (id);
+ALTER TABLE IF EXISTS users ADD CONSTRAINT sessfk FOREIGN KEY (sessionid) REFERENCES sessions_table (id);
+ALTER TABLE IF EXISTS sessions_table ADD CONSTRAINT sursfk FOREIGN KEY (user_id) REFERENCES users (id);
+ALTER TABLE IF EXISTS transactions ADD CONSTRAINT transfk FOREIGN KEY (user_id) REFERENCES users (id);
+ALTER TABLE IF EXISTS balance ADD CONSTRAINT balfk FOREIGN KEY (user_id) REFERENCES users (id);
+ALTER TABLE IF EXISTS portfolio ADD CONSTRAINT portfk FOREIGN KEY (user_id) REFERENCES users (id);
 
--- CREATE INDEX user_id_index ON users (id);
--- CREATE INDEX username_index ON users (username);
--- CREATE INDEX session_id_index ON sessions_table (id);
--- CREATE INDEX session_value_index ON sessions_table (session_value);
+CREATE INDEX user_id_index ON users (id);
+CREATE INDEX user_index ON users (user_email);
+CREATE INDEX session_id_index ON sessions_table (id);
+CREATE INDEX session_value_index ON sessions_table (session_value);
+CREATE INDEX balance_index ON sessions_table (user_id);
+CREATE INDEX portfolio_index ON sessions_table (user_id);
+CREATE INDEX transactions_index ON transactions (user_id);

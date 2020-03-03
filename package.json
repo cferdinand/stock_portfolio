@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start_local": "nodemon -r dotenv/config server/index.js"
+    "create-db": "psql postgres -a -f ./db/schema.sql",
+    "start_local": "nodemon -r dotenv/config server/index.js",
+    "start": "node server/index.js",
+    "build-dev": "webpack -d --watch --mode development",
+    "build-prod": "webpack -p --mode production"
   },
   "author": "",
   "license": "ISC",
