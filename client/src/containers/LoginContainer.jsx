@@ -7,4 +7,4 @@ const mapDispatchToProps = dispatch => {
     validateUser: (user, password) => dispatch(validateUser(user, password))
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);

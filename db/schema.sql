@@ -11,8 +11,8 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
   user_name VARCHAR(60) NULL,
   user_password VARCHAR(1000) NULL,
-  user_email VARCHAR(1000) NULL,
-  sessionid INT NULL,
+  user_email VARCHAR(1000) UNIQUE NULL,
+  sessionid INT NULL
 );
 
 -- ---
@@ -22,8 +22,8 @@ CREATE TABLE users (
 DROP TABLE IF EXISTS balance CASCADE;
 CREATE TABLE balance (
   id SERIAL PRIMARY KEY NOT NULL,
-  user_id INT NULL,
-  acct_balance INT NULL,
+  user_id INT UNIQUE NULL,
+  acct_balance INT NULL
 );
 
 -- ---
@@ -39,7 +39,7 @@ CREATE TABLE portfolio (
   stock_name VARCHAR(60) NULL,
   stock_price INT NULL,
   amount_owned INT NULL,
-  performance INT NULL,
+  performance INT NULL
 );
 
 -- ---
@@ -54,7 +54,7 @@ CREATE TABLE transactions (
   buy_price INT NULL,
   sell_price INT NULL,
   performance INT NULL,
-  created_date INT NULL,
+  created_date INT NULL
 );
 
 -- ---
@@ -65,8 +65,8 @@ CREATE TABLE transactions (
 DROP TABLE IF EXISTS sessions_table CASCADE;
 CREATE TABLE sessions_table (
   id SERIAL PRIMARY KEY NOT NULL,
-  user_id INTEGER NULL,
-  session_value VARCHAR(250) NULL,
+  user_id INTEGER UNIQUE NULL,
+  session_value VARCHAR(250) NULL
 );
 
 ALTER TABLE IF EXISTS users ADD CONSTRAINT sessfk FOREIGN KEY (sessionid) REFERENCES sessions_table (id);
