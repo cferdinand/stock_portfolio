@@ -43,5 +43,15 @@ module.exports = {
       console.log(err);
       res.sendStatus(500);
     }
+  },
+  logout: (req, res, next) => {
+    return models.Sessions.delete({ hash: req.cookies.shortlyid })
+      .then(() => {
+        res.clearCookie("portfoli");
+        res.redirect("/login");
+      })
+      .error(error => {
+        res.status(500).send(error);
+      });
   }
 };

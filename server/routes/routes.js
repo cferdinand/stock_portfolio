@@ -13,6 +13,7 @@ router.get("/home", Auth.verifySession, serveStaticFile);
 Routes to for user interactions
 */
 router.post("/login", controllers.getExistingUser);
+router.post("/logout", controllers.logout);
 router.post("/signup", controllers.addUser);
 
 /*
