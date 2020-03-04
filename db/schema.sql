@@ -9,7 +9,7 @@ WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'portfoli')\gexec
 DROP TABLE IF EXISTS users CASCADE;
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
-  user_name VARCHAR(60) NULL,
+  user_name VARCHAR(60) UNIQUE NULL,
   user_password VARCHAR(1000) NULL,
   user_email VARCHAR(1000) UNIQUE NULL,
   sessionid INT NULL
@@ -53,7 +53,7 @@ CREATE TABLE transactions (
   user_id INTEGER NOT NULL,
   buy_price INT NULL,
   sell_price INT NULL,
-  performance INT NULL,
+  total INT NULL,
   created_date INT NULL
 );
 

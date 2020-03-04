@@ -7,8 +7,13 @@ module.exports = {
       [userId, amount]
     );
   },
+  getBalance: userId => {
+    return db.query(`SELECT acct_balance FROM balance WHERE user_id=${userId}`);
+  },
   updateBalance: async (userId, amount) => {
-    let acctBalance = await this.getBalance(userId);
+    let acctBalance = await db.query(
+      `SELECT acct_balance FROM balance WHERE user_id=${userId}`
+    );
     let calculatedBalance = acctBalance + amount;
     return db
       .query(
@@ -18,7 +23,6 @@ module.exports = {
         return calculatedBalance;
       });
   },
-  getBalance: userId => {
-    return db.query(`SELECT acct_balance FROM balance WHERE user_id=${userId}`);
-  }
+  buyStock: symbol => {},
+  sellStock: symbol => {}
 };

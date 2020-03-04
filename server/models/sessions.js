@@ -19,5 +19,18 @@ module.exports = {
       .catch(err => {
         console.log(err);
       });
+  },
+  update: (sessionId, userId) => {
+    return db.query(
+      `UPDATE sessions_table SET user_id='${userId}' WHERE id='${sessionId}' ON CONFLICT `
+    );
+  },
+  delete: userId => {
+    console.log("weeeee");
+    return db
+      .query(`DELETE FROM sessions_table WHERE user_id=${userId}`)
+      .catch(err => {
+        console.log(err);
+      });
   }
 };

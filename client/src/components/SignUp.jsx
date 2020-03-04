@@ -5,10 +5,12 @@ import Nav from "./Nav.jsx";
 const SignUp = ({ addUser }) => {
   const [username, updateUserName] = useState("");
   const [password, updatePassword] = useState("");
+  const [userEmail, updateEmail] = useState("");
 
   const addNewUser = () => {
-    return addUser(username, password);
+    return addUser(username, userEmail, password);
   };
+
   return (
     <div>
       <Nav />
@@ -27,6 +29,18 @@ const SignUp = ({ addUser }) => {
             onChange={event => {
               updateUserName(event.target.value);
             }}
+          />
+        </div>
+        <label>Email: </label>
+        <div className="email">
+          <input
+            type="email"
+            name="user_email"
+            placeholder="Enter valid email address.."
+            onChange={event => {
+              updateEmail(event.target.value);
+            }}
+            required
           />
         </div>
         <label>Password: </label>

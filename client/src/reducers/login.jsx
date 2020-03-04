@@ -1,7 +1,7 @@
 const login = (state = 0, action) => {
   switch (action.type) {
     case "LOGGEDIN":
-      return action.payload;
+      return state;
     case "NOTLOGGEDIN":
       return 0;
     default:

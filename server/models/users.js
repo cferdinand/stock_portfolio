@@ -13,15 +13,15 @@ module.exports = {
         throw err;
       });
   },
-  addNewUser: (email, password, sessionId) => {
+  addNewUser: (username, email, password, sessionId) => {
     return db
       .query(
-        `INSERT INTO users (user_email, user_password, sessionid) VALUES ($1,$2,$3) RETURNING sessionid, id`,
-        [email, password, sessionId]
+        `INSERT INTO users (user_name,user_email, user_password, sessionid) VALUES ($1,$2,$3,$4) RETURNING sessionid, id`,
+        [username, email, password, sessionId]
       )
       .then(data => {
-        let userId = data[0].id;
-        models.Transactions.updateBalance(userId);
+        let userId = data.rows[0].id;
+        models.Transactions.newBalance(userId);
         return data;
       })
       .then(data => {

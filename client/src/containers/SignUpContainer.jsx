@@ -4,7 +4,7 @@ import SignUp from "../components/SignUp.jsx";
 
 const mapDispatchToProps = dispatch => {
   return {
-    addUser: (user, password) => dispatch(addUser(user, password))
+    addUser: (user, email, password) => dispatch(addUser(user, email, password))
   };
 };
 export default connect(null, mapDispatchToProps)(SignUp);

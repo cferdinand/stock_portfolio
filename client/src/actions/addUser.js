@@ -1,19 +1,18 @@
 import axios from "axios";
+import validEmail from "../lib/emailValidation.js";
+import { Redirect } from "react-router-dom";
 
-const addUser = (username, password) => {
-  return dispatch => {
+const addUser = (username, userEmail, password) => {
+  if (validEmail(userEmail)) {
     return axios
-      .post(`/login/users`, { username, password })
-      .then(({ data }) => {
-        dispatch({
-          type: "LOGGEDIN",
-          payload: data.response
-        });
+      .post(`/signup`, { username, userEmail, password })
+      .then(() => {
+        return true;
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
-  };
+  }
 };
 
 export default addUser;
