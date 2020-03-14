@@ -33,17 +33,19 @@ module.exports = {
   verifySession: (req, res, next) => {
     return models.Sessions.get("id", req.session.id).then(session => {
       if (!session || !session.user_id) {
-        if (!req.route.path.includes("login")) {
-          res.redirect("/login");
-        } else {
-          next();
-        }
-      } else if (req.route.path.includes("login")) {
-        res.redirect("/home");
+        res.redirect("/login");
       } else {
         next();
       }
     });
   },
-  removeSession: (req, res, next) => {}
+  isLoggedIn: (req, res, next) => {
+    return models.Sessions.get("id", req.session.id).then(session => {
+      if (session && session.user_id) {
+        res.redirect("/home");
+      } else {
+        next();
+      }
+    });
+  }
 };

@@ -69,11 +69,11 @@ CREATE TABLE sessions_table (
   session_value VARCHAR(250) NULL
 );
 
-ALTER TABLE IF EXISTS users ADD CONSTRAINT sessfk FOREIGN KEY (sessionid) REFERENCES sessions_table (id);
-ALTER TABLE IF EXISTS sessions_table ADD CONSTRAINT sursfk FOREIGN KEY (user_id) REFERENCES users (id);
-ALTER TABLE IF EXISTS transactions ADD CONSTRAINT transfk FOREIGN KEY (user_id) REFERENCES users (id);
-ALTER TABLE IF EXISTS balance ADD CONSTRAINT balfk FOREIGN KEY (user_id) REFERENCES users (id);
-ALTER TABLE IF EXISTS portfolio ADD CONSTRAINT portfk FOREIGN KEY (user_id) REFERENCES users (id);
+-- ALTER TABLE IF EXISTS sessions_table ADD CONSTRAINT sursfk FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE;
+ALTER TABLE IF EXISTS users ADD CONSTRAINT usrfk FOREIGN KEY (sessionid) REFERENCES sessions_table (id) ON DELETE SET NULL;
+-- ALTER TABLE IF EXISTS transactions ADD CONSTRAINT transfk FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE;
+-- ALTER TABLE IF EXISTS balance ADD CONSTRAINT balfk FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE;
+-- ALTER TABLE IF EXISTS portfolio ADD CONSTRAINT portfk FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE;
 
 CREATE INDEX user_id_index ON users (id);
 CREATE INDEX user_index ON users (user_email);

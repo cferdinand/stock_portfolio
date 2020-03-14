@@ -1,16 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import logout from "../actions/logout.js";
+import { useHistory } from "react-router-dom";
 
 const Nav = () => {
+  const history = useHistory();
+
+  const logoutUser = async () => {
+    let isLoggedOut = await logout();
+    isLoggedOut ? history.push("/login") : "";
+  };
   return (
     <div className="nav_bar">
       <div className="nav_logo">
         <img src="images/logo.png" className="nav_logo_image" />
       </div>
       <div className="logout">
-        <Link to="/signup">
-          <p className="logout_button">logout</p>
-        </Link>
+        <p className="logout_button" onClick={logoutUser}>
+          Logout
+        </p>
       </div>
     </div>
   );

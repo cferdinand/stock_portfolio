@@ -9,7 +9,7 @@ module.exports = {
         return data;
       })
       .catch(err => {
-        console.log(err);
+        console.log("models.getuser error", err);
         throw err;
       });
   },
@@ -28,7 +28,7 @@ module.exports = {
         return data;
       })
       .catch(err => {
-        console.log(err);
+        console.log("models.adduser error", err);
         throw err;
       });
   }

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Nav from "./Nav.jsx";
+import addUser from "../actions/addUser.js";
 
-const SignUp = ({ addUser }) => {
+const SignUp = () => {
   const [username, updateUserName] = useState("");
   const [password, updatePassword] = useState("");
   const [userEmail, updateEmail] = useState("");
+  const history = useHistory();
 
-  const addNewUser = () => {
-    return addUser(username, userEmail, password);
+  const addNewUser = async () => {
+    let newUser = await addUser(username, userEmail, password);
+    newUser ? history.push("/home") : history.push("/signup");
   };
 
   return (

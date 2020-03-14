@@ -6,9 +6,9 @@ const controllers = require("../controllers/index.js");
 /*
 Routes to serve the file after authentication
 */
-router.get("/login", Auth.verifySession, serveStaticFile);
+router.get("/login", Auth.isLoggedIn, serveStaticFile);
 router.get("/home", Auth.verifySession, serveStaticFile);
-router.get("/signup", Auth.verifySession, serveStaticFile);
+router.get("/signup", Auth.isLoggedIn, serveStaticFile);
 
 /*
 Routes to for user interactions
