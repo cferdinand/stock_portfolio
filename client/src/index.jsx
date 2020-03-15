@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "../src/components/App.jsx";
 import { Provider } from "react-redux";
-import store from "../src/store/store.jsx";
+import store from "../src/store/store.js";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Home from "./components/MainPage.jsx";
 import SignUp from "./components/SignUp.jsx";

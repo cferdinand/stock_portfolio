@@ -20,5 +20,6 @@ router.post("/signup", controllers.Users.addUser);
 /*
 Routes to api requests
 */
+router.get("/homedata", controllers.Stock.getTopTenData);
 
 module.exports = router;

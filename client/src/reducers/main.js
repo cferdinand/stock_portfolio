@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import loggedIn from "./login.jsx";
+import topTen from "./topTen.js";
 
 const main = combineReducers({
-  loggedIn
+  topTen
 });
 
 export default main;
