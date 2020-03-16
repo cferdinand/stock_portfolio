@@ -6,6 +6,8 @@ import store from "../src/store/store.js";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import Home from "./components/MainPage.jsx";
 import SignUp from "./components/SignUp.jsx";
+import Portfolio from "./containers/PortfolioContainer.jsx";
+import Transactions from "./components/Transactions/TransactionMain.jsx";
 
 const routing = (
   <Router>
@@ -14,6 +16,8 @@ const routing = (
         <Route export path="/signup" component={SignUp} />
         <Route exact path="/login" component={App} />
         <Route exact path="/home" component={Home} />
+        <Route path="/portfolio" component={Portfolio} />
+        <Route path="/transactions" component={Transactions} />
       </Switch>
     </div>
   </Router>

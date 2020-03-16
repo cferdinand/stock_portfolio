@@ -7,5 +7,18 @@ module.exports = {
       let topTenData = { mostActive: data[0].data, topGained: data[1].data };
       res.status(200).send(topTenData);
     });
+  },
+  getStockPrice: (req, res) => {
+    let symbols = req.query.symbols;
+    models.Stock.getStockPrice(symbols)
+      .then(data => {
+        if (data.message) {
+          throw data;
+        }
+        res.status(200).send(data);
+      })
+      .catch(err => {
+        res.json({ error: `Invalid symbol ${symbols.toUpperCase()}` });
+      });
   }
 };

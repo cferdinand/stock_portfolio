@@ -26,7 +26,14 @@ module.exports = {
   },
   getStockPrice: symbol => {
     let url = Urls.stockUrl("quote");
-    return axios.get(`${url}&symbols=${symbol}`).then(data => {});
+    return axios
+      .get(`${url}&symbols=${symbol}`)
+      .then(({ data }) => {
+        return data;
+      })
+      .catch(err => {
+        return err;
+      });
   },
   getChartData: symbol => {
     let url = Urls.stockUrl("chart");

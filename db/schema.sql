@@ -37,10 +37,8 @@ CREATE TABLE portfolio (
   user_id INTEGER NOT NULL,
   stock_symbol VARCHAR(60) NULL,
   stock_name VARCHAR(60) NULL,
-  stock_price INT NULL,
-  amount_owned INT NULL,
-  performance INT NULL
-);
+  amount_owned INT NULL
+  );
 
 -- ---
 -- Table 'Transactions'
@@ -51,6 +49,9 @@ DROP TABLE IF EXISTS transactions;
 CREATE TABLE transactions (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER NOT NULL,
+  stock_sym VARCHAR NOT NULL,
+  stock_name VARCHAR NOT NULL,
+  amount INTEGER NOT NULL,
   buy_price INT NULL,
   sell_price INT NULL,
   total INT NULL,

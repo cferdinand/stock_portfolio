@@ -31,3 +31,20 @@ body {
   display: flex;
   width: 100%;
 }
+
+.buy-sell {
+  display: flex;
+}
+.buy-sell span:hover {
+  cursor: pointer;
+}
+.buy-sell span {
+  text-decoration: underline;
+}
+
+.buy-sell-hr {
+  width: 2px;
+  margin: 0px 8px;
+  border: 0px;
+  background-color: black;
+}

@@ -1,5 +1,7 @@
 import React from "react";
+import { Route } from "react-router-dom";
 import Nav from "./Nav.jsx";
+import SideNav from "./Sidebar/SideNav.jsx";
 import TopTen from "../containers/TopTenContainer.jsx";
 
 const MainPage = () => {
@@ -9,7 +11,12 @@ const MainPage = () => {
         <Nav />
       </div>
       <div className="mainpage">
-        <TopTen />
+        <div className="sidenav">
+          <SideNav />
+        </div>
+        <div className="content-container">
+          <TopTen />
+        </div>
       </div>
     </div>
   );
