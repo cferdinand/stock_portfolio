@@ -13,9 +13,9 @@ module.exports = {
     models.Transactions.getBalance(user)
       .then(({ rows }) => {
         // then check if there is enough in your balance to purchase the stock
-        let balance = parseFloat(rows[0].acct_balance);
+        let balance = parseFloat(rows[0].acct_balance).toFixed(2);
         // throw err if balance insufficient
-        if (!transaction.total < balance) {
+        if (!balance > transaction.total) {
           throw { error: `Insufficient Balance. Current Balance = ${balance}` };
         }
         // update balance with the new amount and update the transactions table with the stock and user information
@@ -26,7 +26,7 @@ module.exports = {
       })
       .then(() => {
         // then check if you own the stock
-        return models.Transactions.trade(transaction).then(() => {
+        return models.Transactions.trade(transaction, user).then(() => {
           let stock = models.Portfolio.validate(transaction.symbol, user)
             .then(data => {
               return data;
@@ -47,20 +47,21 @@ module.exports = {
             transaction,
             user
           ).then(() => {
-            return models.Portfolio.getPortfolio();
+            return models.Portfolio.getPortfolio(user);
           });
         } else {
           portfolio = models.Portfolio.addStock(transaction, user).then(() => {
-            return models.Portfolio.getPortfolio();
+            return models.Portfolio.getPortfolio(user);
           });
         }
         return portfolio;
       })
-      .then(portfolio => {
+      .then(({ rows }) => {
         // then send portfolio
-        res.status(201).send(portfolio);
+        res.status(201).send(rows);
       })
       .catch(err => {
+        console.log(err);
         res.status(404).send(err);
       });
   },
@@ -73,7 +74,7 @@ module.exports = {
       .then(stock => {
         // minus the amount from your portfolio
         let stockAmount = stock[0] ? stock[0].amount_owned : undefined;
-        if (!!stockAmount && stockAmount > transaction.amount) {
+        if (!!stockAmount && stockAmount >= transaction.amount) {
           stockAmount -= transaction.amount;
         } else {
           throw { error: "Insufficient Stock Balance" };
@@ -89,14 +90,27 @@ module.exports = {
         });
       })
       .then(balance => {
-        models.Transactions.updateBalance(user, balance);
+        return models.Transactions.updateBalance(user, balance);
       })
-      .then(
+      .then(() => {
+        return models.Transactions.trade(transaction, user);
+      })
+      .then(() => {
+        return models.Portfolio.validate(transaction.symbol, user).then(
+          stock => {
+            if (stock[0].amount_owned <= 0) {
+              return models.Portfolio.remove(transaction.symbol, user);
+            }
+          }
+        );
+      })
+      .then(() => {
         models.Portfolio.getPortfolio(user).then(({ rows }) => {
-          res.status(201).send(rows[0]);
-        })
-      )
+          res.status(201).send(rows);
+        });
+      })
       .catch(err => {
+        console.log(err);
         res.status(404).send(err);
       });
   }

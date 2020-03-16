@@ -1,6 +1,4 @@
 const db = require("../../db/index.js");
-const axios = require("axios");
-const models = require("./index.js");
 
 module.exports = {
   getPortfolio: user => {
@@ -22,7 +20,7 @@ module.exports = {
         `SELECT amount_owned FROM portfolio WHERE stock_symbol='${symbol}' AND user_id='${user}'`
       )
       .then(({ rows }) => {
-        return rows[0];
+        return rows;
       })
       .catch(err => {
         return err;
@@ -32,6 +30,15 @@ module.exports = {
     return db
       .query(
         `UPDATE portfolio SET amount_owned='${amount}' WHERE user_id='${user}' AND stock_symbol='${transaction.symbol}'`
+      )
+      .catch(err => {
+        return err;
+      });
+  },
+  remove: (symbol, user) => {
+    return db
+      .query(
+        `DELETE FROM portfolio WHERE stock_symbol='${symbol}' AND user_id=${user}`
       )
       .catch(err => {
         return err;

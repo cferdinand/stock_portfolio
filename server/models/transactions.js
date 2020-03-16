@@ -30,11 +30,11 @@ module.exports = {
         console.log("updating the acct balance error", err);
       });
   },
-  trade: transaction => {
+  trade: (transaction, userId) => {
     return db.query(
       `INSERT INTO transactions(user_id, stock_sym, stock_name,amount,${transaction.type}_price,total,created_date) VALUES ($1,$2,$3,$4,$5,$6,$7)`,
       [
-        transaction.user,
+        userId,
         transaction.symbol,
         transaction.name,
         transaction.amount,
@@ -43,5 +43,15 @@ module.exports = {
         new Date().toLocaleString()
       ]
     );
+  },
+  getTransactions: user => {
+    return db
+      .query(`SELECT * FROM transactions WHERE user_id='${user}'`)
+      .then(({ rows }) => {
+        return rows;
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 };

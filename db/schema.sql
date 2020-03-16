@@ -55,7 +55,7 @@ CREATE TABLE transactions (
   buy_price INT NULL,
   sell_price INT NULL,
   total INT NULL,
-  created_date INT NULL
+  created_date VARCHAR NULL
 );
 
 -- ---
