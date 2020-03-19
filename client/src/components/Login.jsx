@@ -21,6 +21,7 @@ const Login = () => {
           validate();
         }}
       >
+        <h4 className="user-form-heading">Login</h4>
         <div className="email-container">
           <label>Email: </label>
           <div className="email">

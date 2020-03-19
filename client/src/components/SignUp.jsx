@@ -21,12 +21,13 @@ const SignUp = () => {
       </div>
       <div className="user-form-container">
         <form
-          className="signupForm user-form"
+          className="signup-form user-form"
           onSubmit={e => {
             e.preventDefault();
             addNewUser();
           }}
         >
+          <h4 className="user-form-heading">Sign Up</h4>
           <div className="username-container">
             <label>Username: </label>
             <div className="username-input">

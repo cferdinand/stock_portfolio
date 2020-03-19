@@ -56,6 +56,13 @@ body {
   padding-bottom: 12px;
 }
 
+.user-form-heading {
+  margin: 0;
+  position: relative;
+  left: 38%;
+  font-size: 16px;
+  text-decoration: underline;
+}
 .login-form .email-container {
   padding-top: 27px;
 }
@@ -74,6 +81,14 @@ body {
   border-radius: 5px;
   box-shadow: 6px 5px 16px 0px lightgrey;
   padding: 19px 14px 19px 40px;
+}
+
+form.signup-form {
+  height: 260px;
+}
+
+.signup-form .username-container {
+  padding-top: 12px;
 }
 
 .user-buttons-container {
