@@ -41,5 +41,8 @@
     "dotenv": "^8.2.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"
+  },
+  "engines": {
+    "node": "^13.1.0"
   }
 }
