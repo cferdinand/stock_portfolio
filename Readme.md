@@ -8,7 +8,7 @@ An application that simulates a stock portfolio with custom user authentication 
 
 E-mail: chris@gmail.com
 
-Password: test1
+Password: test
 
 ### Ferd Test
 
