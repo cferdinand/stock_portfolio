@@ -11,7 +11,7 @@ const TransactionDataEntry = ({ trans, idx }) => {
     <tr key={idx} className="transaction-data">
       <td>{trans.stock_name}</td>
       <td>{trans.stock_sym.toUpperCase()}</td>
-      <td>{currencyFormat(trans.amount)}</td>
+      <td>{trans.amount}</td>
       <td className={className}>{currencyFormat(price)}</td>
       <td>{trans.created_date}</td>
       <td>{currencyFormat(parseFloat(trans.total))}</td>
