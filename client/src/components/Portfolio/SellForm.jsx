@@ -65,7 +65,8 @@ const SellForm = ({ stockData, stocksList, getData, tradeStock }) => {
       .then(() => {
         let nstock = stockData[symbol.toUpperCase()];
         let total =
-          parseFloat(nstock.quote.latestPrice) * e.target["1"].valueAsNumber;
+          parseFloat(nstock.quote.latestPrice) *
+          Number(e.target["1"].valueAsNumber);
         let isEqual =
           parseFloat(currentTotal) - parseFloat(total.toFixed(2)) === 0;
         let transaction = {
