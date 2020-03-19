@@ -40,7 +40,7 @@ module.exports = {
         transaction.amount,
         transaction.price,
         transaction.total,
-        new Date().toLocaleString()
+        new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" })
       ]
     );
   },
