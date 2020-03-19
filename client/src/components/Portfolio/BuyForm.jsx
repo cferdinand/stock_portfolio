@@ -55,10 +55,7 @@ const BuyAndSellForm = ({ stock, getData, tradeStock }) => {
         let nstock = stock[symbol.toUpperCase()];
         let total =
           parseFloat(nstock.quote.latestPrice) * Number(e.target["2"].value);
-        let currentTotal = document
-          .getElementsByClassName("total-price")[0]
-          .innerText.slice(2);
-        let isEqual = parseFloat(currentTotal) - total === 0;
+        let isEqual = parseFloat(currentTotal) - parseFloat(total.toFixed(2)) === 0;
 
         let transaction = {
           symbol: symbol,
