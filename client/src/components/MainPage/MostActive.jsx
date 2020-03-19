@@ -1,30 +1,44 @@
 import React from "react";
 
 const MostActive = ({ mostActive }) => {
+  const currencyFormat = num => {
+    if (num) {
+      return num.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD"
+      });
+    }
+    return "N/A";
+  };
+
   const MostActiveData = () => {
     if (mostActive) {
       return mostActive.map((stock, idx) => {
         return (
-          <tr key={idx}>
+          <tr key={idx} className="top-ten-body">
             <td>{stock.companyName}</td>
             <td>{stock.symbol}</td>
-            <td>{stock.open}</td>
-            <td>{stock.close}</td>
-            <td>{stock.high}</td>
-            <td>{stock.low}</td>
-            <td>{stock.changePercent}</td>
+            <td>{currencyFormat(stock.open)}</td>
+            <td>{currencyFormat(stock.close)}</td>
+            <td>{currencyFormat(stock.high)}</td>
+            <td>{currencyFormat(stock.low)}</td>
+            <td>{stock.changePercent.toFixed(2)}</td>
           </tr>
         );
       });
     }
-    return [];
+    return (
+      <tr>
+        <td>Loading...</td>
+      </tr>
+    );
   };
 
   return (
-    <div>
+    <div className="most-active top-ten-table">
       <table>
         <thead>
-          <tr key="header">
+          <tr key="header" className="top-ten-heading">
             <th>Name</th>
             <th>Symbol</th>
             <th>Open</th>

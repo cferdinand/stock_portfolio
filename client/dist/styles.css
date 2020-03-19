@@ -1,15 +1,13 @@
 body {
-  background: linear-gradient(
-    180deg,
-    rgba(2, 0, 36, 1) 10%,
-    rgba(16, 121, 9, 1) 35%,
-    rgba(0, 212, 255, 1) 100%
-  );
+  height: 100vh;
+  margin: 0;
+  margin-top: 8px;
+}
+.top-level-app {
   height: 100vh;
 }
 .navigation {
   height: 60px;
-  margin-bottom: 15px;
   width: 100%;
   border-bottom: outset;
 }
@@ -25,11 +23,124 @@ body {
 
 .logout :hover {
   cursor: pointer;
+  text-decoration: underline;
+}
+.logout {
+  color: black;
 }
 
 .nav_bar {
   display: flex;
   width: 100%;
+}
+
+.user-form input {
+  width: 69%;
+  border: 0;
+  height: 28px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.user-form-container {
+  text-align: center;
+}
+
+.user-form-container:last-child {
+  text-align: center;
+  position: relative;
+}
+
+.username-container,
+.email-container {
+  padding-bottom: 12px;
+}
+
+.login-form .email-container {
+  padding-top: 27px;
+}
+
+.password-container {
+  padding-bottom: 20px;
+}
+
+.user-form {
+  display: inline-block;
+  text-align: left;
+  height: 234px;
+  width: 296px;
+  margin-top: 100px;
+  background-color: #f5f4f4;
+  border-radius: 5px;
+  box-shadow: 6px 5px 16px 0px lightgrey;
+  padding: 19px 14px 19px 40px;
+}
+
+.user-buttons-container {
+  text-align: center;
+  display: flex;
+  place-content: space-around;
+}
+
+ul {
+  list-style: none;
+  list-style: none;
+  margin: 0px;
+  padding: 20px;
+}
+
+li {
+  padding: 12px;
+}
+
+.mainpage {
+  display: flex;
+  flex-direction: row;
+}
+
+h3.top-ten-table-heading {
+  margin: 2px 0;
+  background-color: lightgray;
+  width: 93%;
+  padding-left: 12px;
+}
+
+.top-ten-table,
+.transaction-table,
+.portfolio-table {
+  display: flex;
+  place-content: center;
+}
+
+.top-ten-table table,
+.transaction-table table,
+.portfolio-table table {
+  width: 80%;
+}
+
+.top-ten-heading th:nth-child(-n + 2),
+.transaction-heading th:nth-child(-n + 2),
+.portfolio-heading th:nth-child(-n + 2) {
+  text-align: left;
+}
+
+.top-ten-body td:nth-child(n + 3),
+.transaction-data td:nth-child(n + 3),
+.portfolio-data td:nth-child(n + 3) {
+  text-align: center;
+}
+
+.top-ten-body td:nth-child(-n + 1),
+.transaction-data td:nth-child(-n + 1),
+.portfolio-data td:nth-child(-n + 1) {
+  width: 41%;
+}
+
+.buy-sell-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  place-content: space-around;
 }
 
 .buy-sell {
@@ -47,4 +158,79 @@ body {
   margin: 0px 8px;
   border: 0px;
   background-color: black;
+}
+
+.buy-form-container,
+.sell-form-container {
+  margin: 0 15% 2%;
+}
+
+.buy-form {
+  display: flex;
+  justify-content: center;
+}
+
+div.MuiFormControl-root,
+.sell-form-symbol {
+  margin-right: 50px;
+}
+
+.total-price-container {
+  width: 100px;
+  box-sizing: border-box;
+  margin-right: 0;
+  padding-right: 25px;
+}
+
+.stock-name-container {
+  width: 200px;
+}
+
+.stock-name {
+  width: 80%;
+  word-break: break-word;
+}
+
+.sell-select {
+  width: 200px;
+  background: none;
+  border: 1px solid lightgray;
+  height: 55px;
+  font-size: 15px;
+  color: gray;
+}
+
+td.negative {
+  color: red;
+}
+td.positive {
+  color: green;
+}
+td.neutral {
+  color: grey;
+}
+
+.content-container {
+  width: 100%;
+  height: 100%;
+}
+
+button {
+  width: 6rem;
+  height: 3rem;
+  background: lightgreen;
+  border: 0;
+  border-radius: 30px;
+  font: 900 13px system-ui;
+}
+
+button:hover {
+  background: green;
+  cursor: pointer;
+  color: white;
+}
+
+.cash-balance {
+  font-size: 16px;
+  font-weight: 900;
 }

@@ -13,44 +13,50 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login-form-container user-form-container">
       <form
-        className="loginForm"
+        className="login-form user-form"
         onSubmit={e => {
           e.preventDefault();
           validate();
         }}
       >
-        <label>Email: </label>
-        <div className="email">
-          <input
-            type="email"
-            name="user_email"
-            placeholder="Enter valid email address.."
-            onChange={event => {
-              updateEmail(event.target.value);
-            }}
-            required
-          />
+        <div className="email-container">
+          <label>Email: </label>
+          <div className="email">
+            <input
+              type="email"
+              name="user_email"
+              placeholder="Enter valid email address.."
+              onChange={event => {
+                updateEmail(event.target.value);
+              }}
+              required
+            />
+          </div>
         </div>
-        <label>Password: </label>
-        <div className="password">
-          <input
-            type="password"
-            name="pwd"
-            placeholder="Enter valid password.."
-            onChange={event => {
-              updatePassword(event.target.value);
-            }}
-            required
-          />
+        <div className="password-container">
+          <label>Password: </label>
+          <div className="password">
+            <input
+              type="password"
+              name="pwd"
+              placeholder="Enter valid password.."
+              onChange={event => {
+                updatePassword(event.target.value);
+              }}
+              required
+            />
+          </div>
         </div>
-        <button type="submit" className="submit">
-          Login
-        </button>
-        <button type="reset" className="reset">
-          Reset
-        </button>
+        <div className="user-buttons-container">
+          <button type="submit" className="submit">
+            Login
+          </button>
+          <button type="reset" className="reset">
+            Reset
+          </button>
+        </div>
       </form>
       <div>
         <p>

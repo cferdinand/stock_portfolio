@@ -21,10 +21,10 @@ module.exports = {
   updateBalance: (userId, amount) => {
     return db
       .query(
-        `UPDATE balance SET acct_balance='${amount}' WHERE user_id='${userId}'`
+        `UPDATE balance SET acct_balance='${amount}' WHERE user_id='${userId}' RETURNING acct_balance`
       )
-      .then(() => {
-        return amount;
+      .then(({ rows }) => {
+        return rows[0].acct_balance;
       })
       .catch(err => {
         console.log("updating the acct balance error", err);

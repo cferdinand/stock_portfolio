@@ -1,5 +1,5 @@
 import axios from "axios";
-const getStockData = symbols => {
+const getStockData = (symbols, pricing = false) => {
   return dispatch => {
     return axios
       .get(`/stock?symbols=${symbols}`)
@@ -7,10 +7,17 @@ const getStockData = symbols => {
         if (data.error) {
           throw data;
         }
-        dispatch({
-          type: "TRADE",
-          payload: data
-        });
+        if (pricing) {
+          dispatch({
+            type: "PRICING_DATA",
+            payload: data
+          });
+        } else {
+          dispatch({
+            type: "TRADE",
+            payload: data
+          });
+        }
       })
       .catch(err => {
         dispatch({

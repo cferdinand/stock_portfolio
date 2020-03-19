@@ -16,57 +16,71 @@ const SignUp = () => {
 
   return (
     <div>
-      <Nav />
-      <form
-        className="signupForm"
-        onSubmit={e => {
-          e.preventDefault();
-          addNewUser();
-        }}
-      >
-        <label>Username: </label>
-        <div className="username">
-          <input
-            type="text"
-            name="username"
-            onChange={event => {
-              updateUserName(event.target.value);
-            }}
-          />
+      <div className="navigation">
+        <Nav />
+      </div>
+      <div className="user-form-container">
+        <form
+          className="signupForm user-form"
+          onSubmit={e => {
+            e.preventDefault();
+            addNewUser();
+          }}
+        >
+          <div className="username-container">
+            <label>Username: </label>
+            <div className="username-input">
+              <input
+                type="text"
+                name="username"
+                placeholder="Enter a username"
+                onChange={event => {
+                  updateUserName(event.target.value);
+                }}
+              />
+            </div>
+          </div>
+          <div className="email-container">
+            <label>Email: </label>
+            <div className="email-input">
+              <input
+                type="email"
+                name="user_email"
+                placeholder="Enter a valid email address.."
+                onChange={event => {
+                  updateEmail(event.target.value);
+                }}
+                required
+              />
+            </div>
+          </div>
+          <div className="password-container">
+            <label>Password: </label>
+            <div className="password">
+              <input
+                type="password"
+                name="pwd"
+                placeholder="Enter your password"
+                onChange={event => {
+                  updatePassword(event.target.value);
+                }}
+              />
+            </div>
+          </div>
+          <div className="user-buttons-container">
+            <button type="submit" className="submit">
+              Submit
+            </button>
+            <button type="reset" className="reset">
+              Reset
+            </button>
+          </div>
+        </form>
+        <div>
+          <p>
+            Already have an account? <Link to="/login">Click Here</Link>
+          </p>
         </div>
-        <label>Email: </label>
-        <div className="email">
-          <input
-            type="email"
-            name="user_email"
-            placeholder="Enter valid email address.."
-            onChange={event => {
-              updateEmail(event.target.value);
-            }}
-            required
-          />
-        </div>
-        <label>Password: </label>
-        <div className="password">
-          <input
-            type="password"
-            name="pwd"
-            onChange={event => {
-              updatePassword(event.target.value);
-            }}
-          />
-        </div>
-        <button type="submit" className="submit">
-          Submit
-        </button>
-        <button type="reset" className="reset">
-          Reset
-        </button>
-      </form>
-      <div>
-        <p>
-          Already have an account? <Link to="/login">Click Here</Link>
-        </p>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import Nav from "./Nav.jsx";
 
 const App = () => {
   return (
-    <div>
+    <div className="entry">
       <div className="navigation">
         <Nav />
       </div>

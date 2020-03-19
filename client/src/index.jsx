@@ -11,7 +11,7 @@ import Transactions from "./components/Transactions/TransactionMain.jsx";
 
 const routing = (
   <Router>
-    <div>
+    <div className="top-level-app">
       <Switch>
         <Route export path="/signup" component={SignUp} />
         <Route exact path="/login" component={App} />

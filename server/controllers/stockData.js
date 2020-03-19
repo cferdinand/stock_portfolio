@@ -13,12 +13,12 @@ module.exports = {
     models.Stock.getStockPrice(symbols)
       .then(data => {
         if (data.message) {
-          throw data;
+          throw { error: `Invalid symbol ${symbols.toUpperCase()}` };
         }
         res.status(200).send(data);
       })
       .catch(err => {
-        res.json({ error: `Invalid symbol ${symbols.toUpperCase()}` });
+        res.status(404).send(err);
       });
   }
 };

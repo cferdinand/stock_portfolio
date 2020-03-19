@@ -21,7 +21,8 @@ Routes to api requests
 */
 router.get("/homedata", controllers.Stock.getTopTenData);
 router.get("/stock", controllers.Stock.getStockPrice);
-router.get("/transactions", controllers.Transactions.getAllTransactions);
+router.get("/transactions/data", controllers.Transactions.getAllTransactions);
+router.get("/portfolio/data", controllers.Portfolio.getPortfolioData);
 router.get("*", Auth.verifySession, serveStaticFile);
 router.post(
   "/stock",

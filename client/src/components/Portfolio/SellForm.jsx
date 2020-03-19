@@ -1,17 +1,32 @@
 import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 
-const BuyAndSellForm = ({ stock, getData, tradeStock }) => {
+const SellForm = ({ stockData, stocksList, getData, tradeStock }) => {
   const [stockName, setStockName] = useState("Stock Name");
   const [symbol, setSymbol] = useState("");
-  const [currentTotal, setTotal] = useState("");
+  const [currentTotal, setTotal] = useState(0);
 
-  const Buy = () => {
+  const StockList = () => {
+    return stocksList.map((stock, idx) => {
+      return (
+        <option
+          id={idx}
+          key={idx}
+          value={stock.stock_symbol}
+          className="sell-option"
+        >
+          {`${stock.stock_symbol.toUpperCase()} - ${stock.stock_name}`}
+        </option>
+      );
+    });
+  };
+
+  const Sell = () => {
     let formattedPrice = 0;
     let newStock = {};
     let amount = document.getElementsByClassName("form-amount");
-    if (stock[symbol.toUpperCase()]) {
-      newStock = stock[symbol.toUpperCase()].quote;
+    if (stockData[symbol.toUpperCase()]) {
+      newStock = stockData[symbol.toUpperCase()].quote;
       formattedPrice = newStock.latestPrice;
     }
     if (amount.length > 0) {
@@ -20,13 +35,11 @@ const BuyAndSellForm = ({ stock, getData, tradeStock }) => {
         formattedPrice *= amount;
       }
     }
-
     setTimeout(() => {
       setTotal(formattedPrice.toFixed(2));
     });
-
     return (
-      <div className="total-price">
+      <div>
         $ {formattedPrice.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1,")}
       </div>
     );
@@ -34,43 +47,38 @@ const BuyAndSellForm = ({ stock, getData, tradeStock }) => {
 
   const getStockPrice = e => {
     e.persist();
+    e.preventDefault();
     let symbol = e.target.value;
-    if (symbol.length >= 2) {
-      getData(symbol);
-      setSymbol(symbol);
-    }
+    getData(symbol);
+    setSymbol(symbol);
   };
 
   useEffect(() => {
-    if (stock[symbol.toUpperCase()]) {
-      setStockName(stock[symbol.toUpperCase()].quote.companyName);
+    if (stockData[symbol.toUpperCase()]) {
+      setStockName(stockData[symbol.toUpperCase()].quote.companyName);
     }
-  }, [stock]);
+  }, [stockData]);
 
-  const buyStock = e => {
+  const sellStock = e => {
     e.persist();
 
     getData(symbol)
       .then(() => {
-        let nstock = stock[symbol.toUpperCase()];
+        let nstock = stockData[symbol.toUpperCase()];
         let total =
-          parseFloat(nstock.quote.latestPrice) * Number(e.target["2"].value);
-        let currentTotal = document
-          .getElementsByClassName("total-price")[0]
-          .innerText.slice(2);
+          parseFloat(nstock.quote.latestPrice) * e.target["1"].valueAsNumber;
         let isEqual = parseFloat(currentTotal) - total === 0;
-
         let transaction = {
           symbol: symbol,
           name: stockName,
-          amount: Number(e.target["2"].value),
+          amount: e.target["1"].valueAsNumber,
           price: parseFloat(nstock.quote.latestPrice),
           total: parseFloat(currentTotal),
-          type: "buy"
+          type: "sell"
         };
         if (!nstock && !isEqual) {
           let priceChangeConfirm = window.confirm(
-            `${stockName} stock price has changed, would you still like to purchase at this new price?`
+            `${stockName} stock price has changed, would you still like to sell at this new price?`
           );
           if (priceChangeConfirm) {
             tradeStock(transaction);
@@ -87,26 +95,30 @@ const BuyAndSellForm = ({ stock, getData, tradeStock }) => {
   };
 
   return (
-    <div className="buy-form-container">
+    <div className="sell-form-container">
       <form
         action=""
         className="buy-form"
         onSubmit={e => {
           e.preventDefault();
-          buyStock(e);
+          sellStock(e);
         }}
       >
-        <TextField
-          required
-          id="symbol-outlined-required"
-          label="Stock Symbol"
-          variant="outlined"
-          helperText="Enter a valid Stock Symbol"
-          className="form-symbol"
-          onChange={e => {
-            getStockPrice(e);
-          }}
-        />
+        <div className="sell-form-symbol">
+          <select
+            required
+            className="sell-select sell-form"
+            onChange={e => {
+              getStockPrice(e);
+            }}
+            value={symbol}
+          >
+            <option value="" disabled className="sell-option">
+              Pick A Stock
+            </option>
+            <StockList />
+          </select>
+        </div>
         <div className="stock-name-container">
           <div className="stock-name">{stockName}</div>
         </div>
@@ -119,15 +131,15 @@ const BuyAndSellForm = ({ stock, getData, tradeStock }) => {
           type="number"
           pattern="\d+"
           className="form-amount"
-          onChange={Buy}
+          onChange={Sell}
         />
         <div className="total-price-container">
-          <Buy className="total-price" />
+          <Sell />
         </div>
-        <button type="submit">BUY</button>
+        <button type="submit">SELL</button>
       </form>
     </div>
   );
 };
 
-export default BuyAndSellForm;
+export default SellForm;

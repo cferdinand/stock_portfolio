@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const SideNav = () => {
   return (
-    <div>
+    <div className="sidebar-nav">
       <ul>
         <li>
           <Link to="/home">
