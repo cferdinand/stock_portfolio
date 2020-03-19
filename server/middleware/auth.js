@@ -2,7 +2,7 @@ const models = require("../models/index.js");
 
 module.exports = {
   createSession: (req, res, next) => {
-    Promise.resolve(req.cookies.superFan)
+    Promise.resolve(req.cookies.portfoli)
       .then(hash => {
         if (!hash) {
           throw hash;
@@ -21,7 +21,7 @@ module.exports = {
             return models.Sessions.get("id", id);
           })
           .then(session => {
-            res.cookie("superFan", session.session_value);
+            res.cookie("portfoli", session.session_value);
             return session;
           });
       })
@@ -39,5 +39,13 @@ module.exports = {
       }
     });
   },
-  removeSession: (req, res, next) => {}
+  isLoggedIn: (req, res, next) => {
+    return models.Sessions.get("id", req.session.id).then(session => {
+      if (session && session.user_id) {
+        res.redirect("/home");
+      } else {
+        next();
+      }
+    });
+  }
 };

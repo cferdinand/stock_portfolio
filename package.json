@@ -5,11 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start_local": "nodemon -r dotenv/config server/index.js"
+    "create-db": "psql postgres -a -f ./db/schema.sql",
+    "start-dev": "nodemon -r dotenv/config server/index.js",
+    "start": "node server/index.js",
+    "build-dev": "webpack -d --watch --mode development",
+    "build": "webpack -p --mode production"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^4.9.5",
     "axios": "^0.19.0",
     "bcrypt": "^3.0.7",
     "body-parser": "^1.19.0",
@@ -29,6 +34,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
+    "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "babel-loader": "^8.0.6",
