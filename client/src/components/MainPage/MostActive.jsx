@@ -1,16 +1,7 @@
 import React from "react";
+import currencyFormat from "../../lib/currencyFormatter.js";
 
 const MostActive = ({ mostActive }) => {
-  const currencyFormat = num => {
-    if (num) {
-      return num.toLocaleString("en-US", {
-        style: "currency",
-        currency: "USD"
-      });
-    }
-    return "N/A";
-  };
-
   const MostActiveData = () => {
     if (mostActive) {
       return mostActive.map((stock, idx) => {

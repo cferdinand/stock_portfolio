@@ -1,15 +1,7 @@
 import React from "react";
+import currencyFormat from "../../lib/currencyFormatter.js";
 
 const TopGainers = ({ topGainers }) => {
-  const currencyFormat = num => {
-    if (num) {
-      return num.toLocaleString("en-US", {
-        style: "currency",
-        currency: "USD"
-      });
-    }
-    return "N/A";
-  };
   const TopGainersData = () => {
     if (topGainers) {
       return topGainers.map((stock, idx) => {
@@ -21,7 +13,7 @@ const TopGainers = ({ topGainers }) => {
             <td>{currencyFormat(stock.close)}</td>
             <td>{currencyFormat(stock.high)}</td>
             <td>{currencyFormat(stock.low)}</td>
-            <td>{stock.changePercent.toFixed(2)}</td>
+            <td>{parseFloat(stock.changePercent).toFixed(2)}</td>
           </tr>
         );
       });
