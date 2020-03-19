@@ -9,7 +9,7 @@ const Login = () => {
 
   const validate = async () => {
     let isLoggedIn = await validateUser(userEmail, password);
-    isLoggedIn ? history.push("/home") : history.push("/login");
+    isLoggedIn ? history.push("/home") : alert("Incorrect username/password");
   };
 
   return (
